@@ -96,7 +96,7 @@ void main()
 			}
 		
 		case 5: {
-			  printf("\n |<--------EXITING-------->|");
+			  printf("\n |<--------EXITING-------->|\n");
 			  exit(0);	
 			}
 	}
