@@ -81,7 +81,7 @@ void main()
 				{
 					if(pos->data==search)
 					{
-						printf("Element Present in Position %d",count);
+						printf("Element Present in Position %d",count-1);
 						break;
 					}
 					else
