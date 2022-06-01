@@ -8,21 +8,23 @@ void main()
 		int data;
 		struct node *next;
 	};
-	struct node *head=NULL,*pos=NULL,*tail=NULL;
 	
-	int ch,entry,count=0,find,i;
-	printf("\n1:Insert\n2:Delete\n3:Search\n4:Traverse\n5:Exit");
+	struct node *head=NULL,*pos=NULL,*tail=NULL,*tem,*del;
+	
+	int ch, entry,c=0,k,t,temp,i,s=0;
+	
 	while(1)
 	{
-		
-		printf("\nEnter your choice: ");
+		printf("\n\n1:Insert\n2:Display\n3:Search\n4:Delete\n5:Exit\n");
+		printf("Enter your choice :");
 		scanf("%d",&ch);
 		
 		switch(ch)
 		{
+			/*Insert an element*/
 			case 1:
 			{
-				printf("Enter data: ");
+				printf("Enter data :");
 				scanf("%d",&entry);
 				if(head==NULL)
 				{
@@ -37,114 +39,116 @@ void main()
 					tail=tail->next;
 					tail->data=entry;
 				}
+				s++;
 				break;
 			}
 			
 			case 2:
 			{
-				struct node *temp=head;
-				printf("Enter position of data: ");
-				scanf("%d",&entry);
-				count=0;pos=head;
+				pos=head;
+				if(head==NULL)
+				{
+					printf("Empty list");
+					break;
+				}
+				printf("\nElements are: ");
 				while(pos!=NULL)
 				{
+					printf("\t%d",pos->data);
 					pos=pos->next;
-					count++;
-				}
-				
-				if(entry==0)
-				{
-					head=head->next;
-					temp->next=NULL;
-					free(temp);
-				}
-				else if(entry==count)
-				{
-					for(i=0;i<entry-1;i++)
-					{
-						temp=temp->next;
-					}
-					struct node *tail=temp;
-					struct node *del=temp->next;
-					temp->next=temp->next->next;
-					del->next=NULL;
-					free(del);
-				}
-				else
-				{
-					for(i=0;i<entry-1;i++)
-					{
-						temp=temp->next;
-					}
-					
-					struct node *del=temp->next;
-					temp->next=temp->next->next;
-					del->next=NULL;
-					free(del);
 				}
 				break;
 			}
-			
+		
 			case 3:
 			{
+				c=0;
+				t=1;
 				pos=head;
-				count=0;
-				printf("Enter element to search: ");
-				scanf("%d",&find);
-				while(pos!=NULL)
+				if(head==NULL)
 				{
-					if(pos->data==find)
+					printf("Empty List");
+					break;
+				}
+				printf("Enter data to search: ");
+				scanf("%d",&k);
+				while(pos!=NULL)
+				{	
+					c++;
+					temp=pos->data;
+					pos=pos->next;
+					if(temp==k)
 					{
-						printf("Element found at %d",count);
+						t=0;
+						printf("Element is at position %d",c);
 						break;
 					}
-					else
-					{
-						pos=pos->next;
-						count++;
-					}
 				}
-				if(pos==NULL)
-				{
+				if(t)
 					printf("Element not found");
-				}	
-				printf("\n");
 				break;
 			}
-			
 			case 4:
-			{
-				pos=head;
-				
-				if(pos==NULL)
+			{	
+				if(head==NULL)
 				{
-					printf("Nothing to print");
+					printf("Empty List");
+					break;
+				}
+				tem=head;
+				printf("Enter postion of data :");
+				scanf("%d",&entry);
+				if(entry>=s)
+				{
+					printf("Position out of Range");
+					break;
+				}
+				else if(entry==0)
+				{
+					head=head->next;
+					tem->next=NULL;
+					printf("Element deleted is %d",tem->data);
+					free(tem);
+				}
+				else if(entry==s-1)
+				{
+					for(i=0;i<entry-1;i++)
+					{
+						tem=tem->next;
+					}
+					tail=tem;
+					tem=tail->next;
+					tail->next=NULL;
+					printf("Element deleted is %d",tem->data);
+					free(tem);
 				}
 				else
 				{
-					printf("\nElements are: ");
-					while(pos!=NULL)
+					for(i=0;i<entry-1;i++)
 					{
-						printf("%d ",pos->data);
-						pos=pos->next;
+						tem=tem->next;
 					}
+					del=tem->next;
+					tem->next=tem->next->next;
+					del->next=NULL;
+					printf("Element deleted is %d",del->data);
+					free(del);
 				}
-				printf("\n");
+				s--;
+				
 				break;
 			}
-			
 			case 5:
 			{
-				printf("<------Exiting program------>\n");
+				printf("\n|<----Exiting---->|");
 				exit(0);
 			}
 			
-			default:
+			default :
 			{
-				printf("Invalid Input\n");
+				printf("Invalid choice");
+				break;
 			}
 		}
 	}
 }
-			
-					
