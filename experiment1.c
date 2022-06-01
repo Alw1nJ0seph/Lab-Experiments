@@ -1,87 +1,101 @@
 #include<stdio.h>
 #include<stdlib.h>
+
 void main()
 {
- struct node
+	struct node
 	{
-	  int data;
-	  struct node *next;
+		int data;
+		struct node *next;
 	};
- struct node *head=NULL,*pos=NULL,*tail=NULL;
- int c,ch,entry;
- while(1)
+	struct node *head=NULL,*pos=NULL,*tail=NULL;
+	
+	int ch,entry,count=0,find,i;
+	printf("\n1:Insert\n2:Delete\n3:Search\n4:Traverse\n5:Exit");
+	while(1)
 	{
-	  printf("\n1.INSERT\n2.DELETE\n3.DISPLAY\n4.SEARCH\n5.EXIT");
-	  printf("\n\nEnter your choice:  ");
-	  scanf("%d",&ch);
-	  switch(ch)
-	  {
-		case 1: {
-			  printf("\nEnter Data:   ");
-			  scanf("%d",&entry);
-			  if(head == NULL)
+		
+		printf("\nEnter your choice: ");
+		scanf("%d",&ch);
+		
+		switch(ch)
+		{
+			case 1:
+			{
+				printf("Enter data: ");
+				scanf("%d",&entry);
+				if(head==NULL)
 				{
-					head = (struct node *)malloc(sizeof(struct node));
-					head -> data=entry;
-					pos = head;
-					tail = head;					
+					head=(struct node*)malloc(sizeof(struct node));
+					head->data=entry;
+					pos=head;
+					tail=head;
 				}
-			  else
+				else
 				{
-				 	tail -> next=(struct node *)malloc(sizeof(struct node));
-					tail = tail -> next;
-					tail -> data=entry;	
+					tail->next=(struct node*)malloc(sizeof(struct node));
+					tail=tail->next;
+					tail->data=entry;
 				}
-			}break;
-		case 2: {
-	  		 struct node *temp =head;
-	  		 printf("Enter the position of the data: ");
-	  		 scanf("%d",&entry);
-	  		 if(entry == 0)
-	  		 	{
-	  		 	 head=head -> next;
-	  		 	 temp -> next = NULL;
-	  		 	 free(temp);
-	  		 	}
-	  		 else
-	  		 	{
-				 for(int i=0;i<entry-1;i++)
-				 	{
-				 	 temp=temp -> next;
-				 	 struct node *del = temp -> next;
-				 	 temp -> next = temp -> next -> next;
-				 	 del -> next = NULL;
-				 	 free(del);
-				 	}	  		 	
-	  		 	}
-	  		 pos=head;
-			  printf("\n Elements are:");
-			  while(pos!=NULL)
-				{
-					printf("\t%d",pos -> data);
-					pos=pos -> next;	
-				}		
-			}break;
-		case 3: {
-	  		  pos=head;
-			  printf("\n Elements are:");
-			  while(pos!=NULL)
-				{
-					printf("\t%d",pos -> data);
-					pos=pos -> next;	
-				}
-			}break;
-		case 4: {
-			 int search,count=0;
-			 printf("Enter the element to be searched :");
-				scanf("%d",&search);
-				pos=head;
-				count=1;
+				break;
+			}
+			
+			case 2:
+			{
+				struct node *temp=head;
+				printf("Enter position of data: ");
+				scanf("%d",&entry);
+				count=0;pos=head;
 				while(pos!=NULL)
 				{
-					if(pos->data==search)
+					pos=pos->next;
+					count++;
+				}
+				
+				if(entry==0)
+				{
+					head=head->next;
+					temp->next=NULL;
+					free(temp);
+				}
+				else if(entry==count)
+				{
+					for(i=0;i<entry-1;i++)
 					{
-						printf("Element Present in Position %d",count-1);
+						temp=temp->next;
+					}
+					struct node *tail=temp;
+					struct node *del=temp->next;
+					temp->next=temp->next->next;
+					del->next=NULL;
+					free(del);
+				}
+				else
+				{
+					for(i=0;i<entry-1;i++)
+					{
+						temp=temp->next;
+					}
+					
+					struct node *del=temp->next;
+					temp->next=temp->next->next;
+					del->next=NULL;
+					free(del);
+				}
+				break;
+			}
+			
+			case 3:
+			{
+				pos=head;
+				count=0;
+				printf("Enter element to search: ");
+				scanf("%d",&find);
+				while(pos!=NULL)
+				{
+					if(pos->data==find)
+					{
+						printf("Element found at %d",count);
 						break;
 					}
 					else
@@ -91,14 +105,46 @@ void main()
 					}
 				}
 				if(pos==NULL)
-					printf("Element not found ");
-				break;		
+				{
+					printf("Element not found");
+				}	
+				printf("\n");
+				break;
 			}
-		
-		case 5: {
-			  printf("\n |<--------EXITING-------->|\n");
-			  exit(0);	
+			
+			case 4:
+			{
+				pos=head;
+				
+				if(pos==NULL)
+				{
+					printf("Nothing to print");
+				}
+				else
+				{
+					printf("\nElements are: ");
+					while(pos!=NULL)
+					{
+						printf("%d ",pos->data);
+						pos=pos->next;
+					}
+				}
+				printf("\n");
+				break;
 			}
+			
+			case 5:
+			{
+				printf("<------Exiting program------>\n");
+				exit(0);
+			}
+			
+			default:
+			{
+				printf("Invalid Input\n");
+			}
+		}
 	}
-       }
 }
+			
+					
