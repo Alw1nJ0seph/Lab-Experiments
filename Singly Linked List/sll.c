@@ -36,7 +36,6 @@ void main()
 					tail=tail->next;
 					tail->data=entry;
 				}
-				printf("Data succesfully stored\n");
 				break;
 			}
 			
