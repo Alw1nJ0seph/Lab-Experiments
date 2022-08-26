@@ -112,7 +112,7 @@ void InfixToPostfix(char infix_exp[], char postfix_exp[])
 		}
 		
 		else
-		{ 	printf("\nInvalid infix Expression.\n");
+		{ 	printf("\nInvalid Expression.\n");
 			getchar();
 			exit(1);
 		}
@@ -123,7 +123,7 @@ void InfixToPostfix(char infix_exp[], char postfix_exp[])
 	
 	if(top>100)
 	{
-		printf("\nInvalid infix Expression.\n");        
+		printf("\nInvalid Expression.\n");        
 		getchar();
 		exit(1);
 	}
@@ -162,13 +162,13 @@ void main()
 			
 			case 3:
 			{
-				printf("Succesfully exiting program \n");
+				printf("Exiting..... \n");
 				exit(0);
 			}
 			
 			default:
 			{
-				printf("Error,wrong choice input\n");
+				printf("Invalid input\n");
 				break;
 			}             
 		}
