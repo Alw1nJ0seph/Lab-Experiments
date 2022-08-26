@@ -42,24 +42,24 @@ void push(char operator)
     }
 }
 
-int is_operator(char symbol)
+int is_operator(char p)
 {
-	if(symbol == '^' || symbol == '*' || symbol == '/' || symbol == '+' || symbol =='-')
+	if(p == '^' || p == '*' || p == '/' || p == '+' || p =='-')
 		return 1;
 
 	else
 		return 0;
 }
 
-int precedence(char symbol)
+int precedence(char p)
 {                 
-	if(symbol == '^')
+	if(p == '^')
 		return(3);
 		
-	else if(symbol == '*' || symbol == '/')
+	else if(p == '*' || p == '/')
 		return(2);
 		
-	else if(symbol == '+' || symbol == '-')          
+	else if(p == '+' || p == '-')          
 		return(1);
 		
 	else
